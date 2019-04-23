@@ -7,7 +7,8 @@ import {
 import CurrentTripCard from '../CurrentTripCard/CurrentTripCard';
 import PastTripCard from '../PastTripCard/PastTripCard'
 import Footer from '../Footer/Footer'
-
+import {getTrips} from '../../actions/index'
+import {connect} from 'react-redux'
 const StyledNavbar = styled(Navbar)`
 `
 
@@ -41,6 +42,11 @@ class Homepage extends Component {
             }
         ]
     }
+
+    componentDidMount(){
+        this.props.getTrips(localStorage.getItem('userId'))
+    }
+
   render() {
     return (
         <div>
@@ -48,13 +54,11 @@ class Homepage extends Component {
                 <h1>Trips</h1>
             </StyledNavbar>
             
-            {this.state.currentTrips.map(currentTrip => {
+            {this.props.userCurrentTrips.map(currentTrip => {
                 return <CurrentTripCard currentTrip={currentTrip} />
             })}
 
             {/* <CurrentTripCard /> */}
-
-           
             
             <PastTrips>Past Trips</PastTrips>
             
@@ -68,4 +72,10 @@ class Homepage extends Component {
   }
 }
 
-export default Homepage
+const mapStateToProps = state => {
+    return{
+        userCurrentTrips: state.userTrips
+    }
+}
+
+export default connect(mapStateToProps, {getTrips})(Homepage)

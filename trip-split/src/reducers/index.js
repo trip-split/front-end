@@ -1,11 +1,12 @@
-import {REGISTER_START, REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_START, LOGIN_SUCCESS, LOGIN_FAIL} from '../actions/index'
+import {REGISTER_START, REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_START, LOGIN_SUCCESS, LOGIN_FAIL, GET_TRIPS_START, GET_TRIPS_SUCCESS, GET_TRIPS_FAIL} from '../actions/index'
 
 const initialState = {
-    user: '',
-    error: '',
     isFetching: false,
     isRegistering: false,
-    isLoggingIn: false
+    isLoggingIn: false,
+    isFetchingTrips: false,
+    userTrips: [],
+    fetchTripsError: ''
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -36,6 +37,7 @@ export const rootReducer = (state = initialState, action) => {
         case LOGIN_SUCCESS:
             console.log("Login Success payload:", action.payload)
             localStorage.setItem("jwt", action.payload.token)
+            localStorage.setItem("id", action.payload.id)
             return {
                 ...state,
                 isLoggingIn: false
@@ -45,6 +47,25 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoggingIn: false
+            }
+        case GET_TRIPS_START:
+            return {
+                ...state,
+                isFetchingTrips: true
+            }
+        case GET_TRIPS_SUCCESS:
+            console.log(action.payload);
+            return{
+                ...state,
+                isFetching: false,
+                userTrips: action.payload
+            }
+        case GET_TRIPS_FAIL:
+            console.log(action.payload)
+            return {
+                ...state, 
+                isFetchingTrips: false,
+                fetchTripsError: action.payload
             }
          default:
         return state;

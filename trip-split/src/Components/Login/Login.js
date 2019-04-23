@@ -35,7 +35,7 @@ class Login extends React.Component {
          })
      }
 
-     register = e => {
+     login = e => {
          e.preventDefault();
          this.props.login(this.state.credentials)
          .then(() => this.props.history.push('/homepage'));
@@ -74,7 +74,7 @@ class Login extends React.Component {
                     placeholder="Enter password" 
                     onChange={this.handleChange} />
                     <br/>
-                    <button onClick={this.register}>Submit</button>
+                    <button onClick={this.login}>Submit</button>
                 </StyledForm>
             </StyledPage>
          )

@@ -73,10 +73,10 @@ export default class CurrentTripCard extends Component {
                     <StyledImg src="https://www.azamaraclubcruises.com/sites/default/files/heros/pr-venice-italy-5-may-19.jpg" />
                 </CardImgContainer>
                 <CardContentContainer>
-                    <h2>{this.props.currentTrip.title}</h2>
-                    <StyledCardText>Started {this.props.currentTrip.daysSinceTripStart} days ago</StyledCardText>
-                    <StyledCardText>{this.props.currentTrip.peopleOnTrip} people</StyledCardText>
-                    <MoneySpent>${this.props.currentTrip.totalSpent} spent</MoneySpent>
+                    <h2>{this.props.currentTrip.location}</h2>
+                    <StyledCardText>Started {this.props.currentTrip.date} days ago</StyledCardText>
+                    <StyledCardText> X people</StyledCardText>
+                    <MoneySpent>$ spent</MoneySpent>
                 </CardContentContainer>
             </MainContainer>
             <StyledButton>X END TRIP</StyledButton>

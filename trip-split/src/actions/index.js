@@ -8,6 +8,10 @@ export const LOGIN_START = "LOGIN_START"
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
 export const LOGIN_FAIL = "LOGIN_FAIL"
 
+export const GET_TRIPS_START = "GET_TRIPS_START"
+export const GET_TRIPS_SUCCESS = "GET_TRIPS_SUCCESS"
+export const GET_TRIPS_FAIL = "GET_TRIPS_FAIL"
+
 export const register = credentials => dispatch => {
     dispatch({type: REGISTER_START })
 
@@ -33,6 +37,24 @@ export const login = credentials => dispatch => {
     }))
     .catch(err => dispatch({
         type: LOGIN_FAIL,
+        payload: err
+    }))
+}
+
+export const getTrips = userId => dispatch => {
+    dispatch({type: GET_TRIPS_START});
+
+    axios.get(`http://localhost:5000/api/usertrips/${userId}`, {
+        headers: {
+            Authorization: localStorage.getItem('jwt')
+        }
+    })
+    .then(res => dispatch({
+        type: GET_TRIPS_SUCCESS,
+        payload: res.data
+    }))
+    .catch(err => dispatch({
+        type: GET_TRIPS_FAIL,
         payload: err
     }))
 }
