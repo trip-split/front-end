@@ -1,12 +1,13 @@
 import React from "react"
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { register } from '../actions/index'
 const StyledPage = styled.div`
 
 `
 
 const StyledForm = styled.div`
-margin: 20% auto
+margin: 10% auto
 `
 
 const StyledInput = styled.input`
@@ -18,51 +19,25 @@ const StyledInput = styled.input`
 class Login extends React.Component {
 
      state = {
-       email:'',
-       username: '',
-       password:''
+        credentials: {
+            email:'',
+            username: '',
+            password:''
+                }
      }
 
      handleChange = e => {
          this.setState({
-             [e.target.name]: e.target.value
+             credentials: {
+                [e.target.name]: e.target.value
+             }
          })
      }
 
-//    handleEmail(text)
-//    {
-//      this.ListeningStateChangedEvent({ email: text.target.value })
-//    }
-
-//    handleUsername(text)
-//    {
-//      this.ListeningStateChangedEvent({ username: text.target.value })
-//    }
-
-//    handlePassword(text)
-//    {
-//      this.ListeningStateChangedEvent({ password: text.target.value})
-//    }
-
-//    login() {
-//      let obj = {}
-//      obj.email = this.state.email;
-//      obj.username = this.state.username;
-//      obj.password = this.state.password
-
-//      fetch('http:localhost//',
-//      {
-//       header: {
-//         "content-type": "application/json"
-//       },
-//       method: 'POST',
-//       body:JSON.stringify({obj})
-//      }
-
-//      ).then
-//     }
-
-    //  console.warn("all-state")
+     register = e => {
+         e.preventDefault();
+         this.props.register(this.state.credentials)
+     }
 
      render() {
          return (
@@ -72,25 +47,25 @@ class Login extends React.Component {
                     <StyledInput
                     type="text" 
                     name="email"
-                    value={this.state.email}
+                    value={this.state.credentials.email}
                     placeholder="Enter email"
                     onChange={this.handleChange} />
                     <br/>
                     <StyledInput 
                     type="text" 
                     name="username"
-                    value={this.state.username}
+                    value={this.state.credentials.username}
                     placeholder="Enter username" 
                     onChange={this.handleChange} />
                     <br/>
                     <StyledInput
                     type="text"
                     name="password"
-                    value={this.state.password}
+                    value={this.state.credentials.password}
                     placeholder="Enter password" 
                     onChange={this.handleChange} />
                     <br/>
-                    <button>Submit</button>
+                    <button onClick={this.register}>Submit</button>
                 </StyledForm>
             </StyledPage>
          )
@@ -104,4 +79,4 @@ const mapStateToProps = state =>  {
     }
 }
 
-export default connect(mapStateToProps, {})(Login)
+export default connect(mapStateToProps, {register})(Login)

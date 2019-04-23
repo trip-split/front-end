@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import { Card, CardImg, p, CardBody,
-    CardTitle, CardSubtitle, Button } from 'reactstrap';
+
 
     const StyledCard = styled.div`
     display: flex;

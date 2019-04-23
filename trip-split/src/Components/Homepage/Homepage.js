@@ -1,17 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import {
-    Collapse,
     Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem } from 'reactstrap';
+    } from 'reactstrap';
 
 import CurrentTripCard from '../CurrentTripCard/CurrentTripCard';
 import PastTripCard from '../PastTripCard/PastTripCard'
