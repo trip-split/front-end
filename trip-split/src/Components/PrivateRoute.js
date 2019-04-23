@@ -8,7 +8,7 @@ export default function PrivateRoute({component: Component, ...rest}) {
         <Route 
             {...rest} 
             render={() => {
-            if (localStorage.getItem('token'))
+            if (localStorage.getItem('jwt'))
             
                 return <Component />
                 else{

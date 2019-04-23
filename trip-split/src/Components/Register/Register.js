@@ -1,7 +1,8 @@
 import React from "react"
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { register } from '../actions/index'
+import { register } from '../../actions/index'
+import axios from 'axios'
 const StyledPage = styled.div`
 
 `
@@ -16,19 +17,21 @@ const StyledInput = styled.input`
     font-size: 2.4rem
 `
 
-class Login extends React.Component {
+class Register extends React.Component {
 
      state = {
         credentials: {
-            email:'',
             username: '',
-            password:''
-                }
+            password:'',
+            email:''
+                }, 
+        isRegistered: false
      }
 
      handleChange = e => {
          this.setState({
              credentials: {
+                 ...this.state.credentials,
                 [e.target.name]: e.target.value
              }
          })
@@ -37,7 +40,22 @@ class Login extends React.Component {
      register = e => {
          e.preventDefault();
          this.props.register(this.state.credentials)
+            .then(() => this.props.history.push('/login'));
      }
+
+    // register = e => {
+    //     e.preventDefault();
+    //     const URL = 'http://localhost:5000' 
+    //     // let URL = 'https://pintereacher.herokuapp.com'
+    //     const creds = this.state.credentials
+    //     axios.post(`${URL}/api/register`, creds)
+    //       .then(res => {
+    //         this.setState({isRegistered:true})
+    //         // localStorage.setItem("jwt", res.data.token);
+    //         this.props.history.push('/homepage')
+    //       }).catch(err => console.log(err));
+    //     console.log("Credentials", this.state.credentials);
+    //   };
 
      render() {
          return (
@@ -45,13 +63,6 @@ class Login extends React.Component {
                  <h1> Login </h1>
                  <StyledForm>
                     <StyledInput
-                    type="text" 
-                    name="email"
-                    value={this.state.credentials.email}
-                    placeholder="Enter email"
-                    onChange={this.handleChange} />
-                    <br/>
-                    <StyledInput 
                     type="text" 
                     name="username"
                     value={this.state.credentials.username}
@@ -63,6 +74,13 @@ class Login extends React.Component {
                     name="password"
                     value={this.state.credentials.password}
                     placeholder="Enter password" 
+                    onChange={this.handleChange} />
+                    <br/>
+                    <StyledInput 
+                    type="text" 
+                    name="email"
+                    value={this.state.credentials.email}
+                    placeholder="Enter email"
                     onChange={this.handleChange} />
                     <br/>
                     <button onClick={this.register}>Submit</button>
@@ -79,4 +97,4 @@ const mapStateToProps = state =>  {
     }
 }
 
-export default connect(mapStateToProps, {register})(Login)
+export default connect(mapStateToProps, {register})(Register)
