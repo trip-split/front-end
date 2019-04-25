@@ -81,7 +81,7 @@ import {connect} from 'react-redux'
         <StyledCard>
             <MainContainer>
                 <CardImgContainer>
-                    <StyledImg src="https://www.azamaraclubcruises.com/sites/default/files/heros/pr-venice-italy-5-may-19.jpg" />
+                    <StyledImg src={this.props.currentTrip.image} />
                 </CardImgContainer>
                 <CardContentContainer>
                     <h2>{this.props.currentTrip.location}</h2>

@@ -2,7 +2,7 @@ import React from "react"
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { register } from '../../actions/index'
-import axios from 'axios'
+
 const StyledPage = styled.div`
 
 `
@@ -42,19 +42,7 @@ class Register extends React.Component {
             .then(() => this.props.history.push('/login'));
      }
 
-    // register = e => {
-    //     e.preventDefault();
-    //     const URL = 'http://localhost:5000' 
-    //     // let URL = 'https://pintereacher.herokuapp.com'
-    //     const creds = this.state.credentials
-    //     axios.post(`${URL}/api/register`, creds)
-    //       .then(res => {
-    //         this.setState({isRegistered:true})
-    //         // localStorage.setItem("jwt", res.data.token);
-    //         this.props.history.push('/homepage')
-    //       }).catch(err => console.log(err));
-    //     console.log("Credentials", this.state.credentials);
-    //   };
+    
 
      render() {
          return (

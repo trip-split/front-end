@@ -59,6 +59,7 @@ class Homepage extends Component {
             {this.props.pastTrips.map(pastTrip => {
                 return <PastTripCard pastTrip={pastTrip} />
             })}
+            <Footer />
         </div>
     )
   }

@@ -14,7 +14,7 @@ const StyledInput = styled.input`
     font-size: 2.4rem
 `
 
- class AddPeopleToTripForm extends Component {
+ class EditPeopleInTrip extends Component {
 
   state = {
     newPerson: {
@@ -52,11 +52,9 @@ const StyledInput = styled.input`
   }
 
   render() {
-    console.log("People Trip Form currentTrip:", this.props.currentTrip[0])
-    console.log(this.state.currentTrip)
     return (
       <div>
-        <h1>Add People to Trip Form</h1>
+        <h1>Edit People in the Trip</h1>
         <StyledForm>
             <StyledInput
             type="text" 
@@ -72,7 +70,7 @@ const StyledInput = styled.input`
             onChange={this.handleChange} 
             placeholder="Image thumbnail..."/>
             <div />
-            <button onClick={this.addNewPerson}>Submit New Person...</button>
+            <button onClick={this.addNewPerson}>Submit Edit</button>
         </StyledForm>
       </div>
     )
@@ -81,10 +79,10 @@ const StyledInput = styled.input`
 
 const mapStateToProps = state => {
   return{
-    currentTrip: state.currentTrip
-    
+    currentTrip: state.currentTrip,
+    peopleOnTrip: state.peopleOnTrip
   }
 }
 
 
-export default connect(mapStateToProps, {addNewPerson})(AddPeopleToTripForm)
+export default connect(mapStateToProps, {addNewPerson})(EditPeopleInTrip)

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 
 const StyledFooter = styled.div`
 display: flex;
@@ -12,12 +13,17 @@ height: 3rem
 `
 
  class Footer extends Component {
+
+ 
+
   render() {
     return (
       <StyledFooter>
-        <i class="fas fa-car-side fa-3x"></i>
-        <i class="fas fa-users fa-3x"></i>
-        <i class="fas fa-money-bill-wave fa-3x"></i>
+        <i className="fas fa-car-side fa-3x"></i>
+        <Link to='/tripgroup'>
+            <i className="fas fa-users fa-3x"></i>
+        </Link>
+        <i className="fas fa-money-bill-wave fa-3x"></i>
       </StyledFooter>
     )
   }

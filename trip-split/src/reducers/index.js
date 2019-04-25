@@ -4,7 +4,8 @@ import {REGISTER_START, REGISTER_SUCCESS, REGISTER_FAIL,
     ADD_TRIP_START, ADD_TRIP_SUCCESS, ADD_TRIP_FAIL,
     GET_CURRENT_TRIP,
     END_TRIP_START, END_TRIP_SUCCESS, END_TRIP_FAIL,
-    ADD_NEW_PERSON_SUCCESS, ADD_NEW_PERSON_START, ADD_NEW_PERSON_FAIL
+    ADD_NEW_PERSON_SUCCESS, ADD_NEW_PERSON_START, ADD_NEW_PERSON_FAIL, 
+    VIEW_TRIP_PARTICIPANTS_START, VIEW_TRIP_PARTICIPANTS_SUCCESS, VIEW_TRIP_PARTICIPANTS_FAIL
 } from '../actions/index'
 
 const initialState = {
@@ -71,7 +72,7 @@ export const rootReducer = (state = initialState, action) => {
                 return currentTrip.isCurrent === 1
             })
             const pastTrips = action.payload.filter(currentTrip => {
-                return currentTrip.isCurrent != 1
+                return currentTrip.isCurrent !== 1
             })
             console.log(currentTrip);
             return{
@@ -115,13 +116,29 @@ export const rootReducer = (state = initialState, action) => {
                 currentTrip: []
             }
         case ADD_NEW_PERSON_SUCCESS:
-        console.log("Add new person in reducer fired")
-        console.log(action.payload);
+        // console.log("Add new person in reducer fired")
+        // console.log(action.payload);
         case ADD_NEW_PERSON_FAIL:
             console.log(action.payload)
          default:
         return state;
+
+        case VIEW_TRIP_PARTICIPANTS_SUCCESS:
+        console.log("viewing participants for trip")
+        console.log(action.payload);
+            return{
+                ...state,
+                peopleOnTrip: action.payload
+            }
+        case VIEW_TRIP_PARTICIPANTS_FAIL:
+            // console.log(action.payload)
+        return {
+            ...state,
+            peopleOnTrip: []
+        }
+
+
+        }
     }
-}
 
 export default rootReducer

@@ -26,6 +26,10 @@ export const ADD_NEW_PERSON_START = "ADD_NEW_PERSON_START"
 export const ADD_NEW_PERSON_SUCCESS = "ADD_NEW_PERSON_SUCCESS"
 export const ADD_NEW_PERSON_FAIL = "ADD_NEW_PERSON_FAIL"
 
+export const VIEW_TRIP_PARTICIPANTS_START = "VIEW_TRIP_PARTICIPANTS_START"
+export const VIEW_TRIP_PARTICIPANTS_SUCCESS = "VIEW_TRIP_PARTICIPANTS_SUCCESS"
+export const VIEW_TRIP_PARTICIPANTS_FAIL = "VIEW_TRIP_PARTICIPANTS_FAIL"
+
 export const register = credentials => dispatch => {
     dispatch({type: REGISTER_START })
 
@@ -133,4 +137,25 @@ export const addNewPerson = personInfo => dispatch => {
         payload: err
     }))
 
+}
+
+export const viewTripParticipants =  (tripId) => dispatch => {
+    dispatch({type: VIEW_TRIP_PARTICIPANTS_START});
+
+   return axios.get(`http://localhost:5000/api/usertrips/participants/${tripId}`, {
+        headers: {
+            Authorization: localStorage.getItem('jwt')
+        },
+        params: {
+
+        }
+    })
+    .then(res => dispatch({
+        type: VIEW_TRIP_PARTICIPANTS_SUCCESS,
+        payload: res.data
+    }))
+    .catch(err => dispatch({
+        type: VIEW_TRIP_PARTICIPANTS_FAIL,
+        payload: err
+    }))
 }

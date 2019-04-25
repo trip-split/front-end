@@ -9,6 +9,7 @@ import NewTripForm from './Components/NewTripForm/NewTripForm'
 import styled from 'styled-components'
 import CurrentTripGroup from './Components/CurrentTripGroup/CurrentTripGroup';
 import AddPeopleToTripForm from './Components/AddPeopleToTripForm/AddPeopleToTripForm'
+import EditPeopleInTrip from './Components/AddPeopleToTripForm/EditPeopleInTrip'
 import {connect} from 'react-redux'
 
 
@@ -37,6 +38,7 @@ class App extends Component {
           <Route path = "/register" component={Register} />
           <Route path = "/add-people-to-trip" component ={AddPeopleToTripForm} />
           <Route path = "/tripgroup" component ={CurrentTripGroup} />
+          <Route path = "/edit-people-in-trip" component ={EditPeopleInTrip} />
           <PrivateRoute exact path = "/homepage" component={Homepage} />
         </div>
       </Router>
