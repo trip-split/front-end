@@ -40,7 +40,7 @@ const StyledInput = styled.input`
 
   render() {
     console.log("People Trip Form currentTrip:", this.props.currentTrip[0])
-    console.log(this.state.newPerson.tripId)
+   
     return (
       <div>
         <h1>Add People To Trip Form</h1>

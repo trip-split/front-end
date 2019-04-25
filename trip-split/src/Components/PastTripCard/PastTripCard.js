@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 const StyledCard = styled.div`
-display: flex
+display: flex;
 width: 90%;
 margin: 0 auto;
 margin-top: 3rem;
@@ -22,9 +22,9 @@ height: 100%;
 
 const MainContainer = styled.div`
 display: flex;
-flex-direction: column
+flex-direction: column;
 align-items: flex-start;
-width: 100%
+width: 100%;
 margin-left: 2rem;
 line-height: 2rem;
 
@@ -42,7 +42,7 @@ class PastTripCard extends Component {
 
         <StyledCard>
             <ImgContainer>
-                <StyledImg src="https://upload.wikimedia.org/wikipedia/commons/6/64/BryceCanyon-Amphiteatre1.jpg" />
+                <StyledImg src={this.props.pastTrip.image} />
             </ImgContainer>
             <MainContainer>
                 <h2>
