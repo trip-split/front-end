@@ -12,6 +12,7 @@ export default function PrivateRoute({component: Component, ...rest}) {
             
                 return <Component />
                 else{
+                    alert(`You're not authorized to view this page.`)
                     return <Redirect to ="/login" />
                 }
             

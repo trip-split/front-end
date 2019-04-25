@@ -5,7 +5,12 @@ import Homepage from './Components/Homepage/Homepage'
 import Login from './Components/Login/Login'
 import PrivateRoute from './Components/PrivateRoute'
 import Register from './Components/Register/Register'
+import NewTripForm from './Components/NewTripForm/NewTripForm'
 import styled from 'styled-components'
+import CurrentTripGroup from './Components/CurrentTripGroup/CurrentTripGroup';
+import AddPeopleToTripForm from './Components/AddPeopleToTripForm/AddPeopleToTripForm'
+import {connect} from 'react-redux'
+
 
 const StyledLink = styled(Link)`
 font-size: 2rem
@@ -22,9 +27,16 @@ class App extends Component {
           <StyledLink to="/register">Register</StyledLink>
           <div />
           <StyledLink to="/homepage">Homepage</StyledLink>
-          
+          <div />
+          <StyledLink to="/add-people-to-trip">Add People To Trip</StyledLink>
+          <div />
+          {/* {this.props.currentTrip ? (this.props.currentTrip.length === 0 ? <StyledLink to="/newtripform">Add New Trip</StyledLink>: null): null} */}
+          <StyledLink to="/newtripform">Add New Trip</StyledLink>
+          <Route path = "/newtripform" component={NewTripForm}></Route>
           <Route path = "/login" component={Login} />
           <Route path = "/register" component={Register} />
+          <Route path = "/add-people-to-trip" component ={AddPeopleToTripForm} />
+          <Route path = "/tripgroup" component ={CurrentTripGroup} />
           <PrivateRoute exact path = "/homepage" component={Homepage} />
         </div>
       </Router>
@@ -32,4 +44,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    currentTrip: state.currentTrip
+  }
+}
+
+export default connect(mapStateToProps, {})(App);

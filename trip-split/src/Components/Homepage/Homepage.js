@@ -26,14 +26,10 @@ const CurrentTripContainer = styled.div`
 class Homepage extends Component {
 
     state = {
-        currentTrips: [
-            {
-                title: 'Italy 2018',
-                daysSinceTripStart: 5,
-                peopleOnTrip: 7,
-                totalSpent: 1038
-            }
-        ],
+        currentTrips: {
+
+        },
+
         pastTrips: [
             {
                 title: 'Bryce Canyon',
@@ -44,29 +40,25 @@ class Homepage extends Component {
     }
 
     componentDidMount(){
-        this.props.getTrips(localStorage.getItem('userId'))
+        
+        this.props.getTrips(localStorage.getItem('userId'));
     }
 
   render() {
+      console.log("Homepage current trip:", this.props.currentTrip)
     return (
         <div>
             <StyledNavbar color="light">
                 <h1>Trips</h1>
             </StyledNavbar>
-            
-            {this.props.userCurrentTrips.map(currentTrip => {
-                return <CurrentTripCard currentTrip={currentTrip} />
-            })}
 
-            {/* <CurrentTripCard /> */}
-            
+            {this.props.currentTrip.length > 0 ? <CurrentTripCard currentTrip={this.props.currentTrip[0]} />:null}
+
             <PastTrips>Past Trips</PastTrips>
             
-            {this.state.pastTrips.map(pastTrip => {
+            {this.props.pastTrips.map(pastTrip => {
                 return <PastTripCard pastTrip={pastTrip} />
             })}
-            {/* <PastTripCard /> */}
-            <Footer />
         </div>
     )
   }
@@ -74,7 +66,9 @@ class Homepage extends Component {
 
 const mapStateToProps = state => {
     return{
-        userCurrentTrips: state.userTrips
+        userTrips: state.userTrips,
+        pastTrips: state.pastTrips,
+        currentTrip: state.currentTrip
     }
 }
 

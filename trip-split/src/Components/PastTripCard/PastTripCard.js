@@ -39,15 +39,16 @@ class PastTripCard extends Component {
   render() {
     return (
       <div>
+
         <StyledCard>
             <ImgContainer>
                 <StyledImg src="https://upload.wikimedia.org/wikipedia/commons/6/64/BryceCanyon-Amphiteatre1.jpg" />
             </ImgContainer>
             <MainContainer>
                 <h2>
-                    {this.props.pastTrip.title}
+                    {this.props.pastTrip.location}
                 </h2>
-                <Dates>{this.props.pastTrip.tripStart} - {this.props.pastTrip.tripEnd}</Dates>
+                <Dates>{this.props.pastTrip.date}</Dates>
             </MainContainer>
         </StyledCard>
       </div>

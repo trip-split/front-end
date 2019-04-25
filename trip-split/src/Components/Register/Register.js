@@ -25,7 +25,6 @@ class Register extends React.Component {
             password:'',
             email:''
                 }, 
-        isRegistered: false
      }
 
      handleChange = e => {
@@ -60,7 +59,7 @@ class Register extends React.Component {
      render() {
          return (
              <StyledPage>
-                 <h1> Login </h1>
+                 <h1> Register </h1>
                  <StyledForm>
                     <StyledInput
                     type="text" 
@@ -92,7 +91,7 @@ class Register extends React.Component {
 
 const mapStateToProps = state =>  {
     return {
-        isFetching: state.isFetching,
+        // isFetching: state.isFetching,
         error: state.error
     }
 }

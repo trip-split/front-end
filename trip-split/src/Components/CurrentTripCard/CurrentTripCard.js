@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-
-
+import {endTrip, getTrips} from '../../actions/index'
+import {connect} from 'react-redux'
 
     const StyledCard = styled.div`
     display: flex;
@@ -63,7 +63,18 @@ import styled from 'styled-components'
     border-radius: .5rem 0 0 0
     `
 
-export default class CurrentTripCard extends Component {
+    
+
+ class CurrentTripCard extends Component {
+
+  endTrip = e => {
+    e.preventDefault();
+    console.log(this.props)
+    // send user id and id to action so we can find the user in the get and then change the isCurrent var to 0. 
+    this.props.endTrip(this.props.currentTrip.id)
+    .then(() => this.props.getTrips(localStorage.getItem('userId')))
+  }
+
   render() {
     return (
       <div>
@@ -74,14 +85,16 @@ export default class CurrentTripCard extends Component {
                 </CardImgContainer>
                 <CardContentContainer>
                     <h2>{this.props.currentTrip.location}</h2>
-                    <StyledCardText>Started {this.props.currentTrip.date} days ago</StyledCardText>
+                    <StyledCardText> Trip Start Date: {this.props.currentTrip.date}</StyledCardText>
                     <StyledCardText> X people</StyledCardText>
                     <MoneySpent>$ spent</MoneySpent>
                 </CardContentContainer>
             </MainContainer>
-            <StyledButton>X END TRIP</StyledButton>
+            <StyledButton onClick={this.endTrip}>X END TRIP</StyledButton>
         </StyledCard>
       </div>
     )
   }
 }
+
+export default connect(null, {endTrip, getTrips})(CurrentTripCard);
