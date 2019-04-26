@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+
 import {endTrip, getTrips} from '../../actions/index'
 import {connect} from 'react-redux'
 
@@ -9,6 +10,7 @@ import {connect} from 'react-redux'
     width: 90%;
     margin: 0 auto;
     margin-top: 3rem;
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175)
     `
 
     const MainContainer = styled.div`
@@ -92,6 +94,7 @@ import {connect} from 'react-redux'
             </MainContainer>
             <StyledButton onClick={this.endTrip}>X END TRIP</StyledButton>
         </StyledCard>
+        
       </div>
     )
   }

@@ -30,6 +30,10 @@ export const VIEW_TRIP_PARTICIPANTS_START = "VIEW_TRIP_PARTICIPANTS_START"
 export const VIEW_TRIP_PARTICIPANTS_SUCCESS = "VIEW_TRIP_PARTICIPANTS_SUCCESS"
 export const VIEW_TRIP_PARTICIPANTS_FAIL = "VIEW_TRIP_PARTICIPANTS_FAIL"
 
+
+export const SEND_CURRENT_PARTICIPANT_SUCCESS = "SEND_CURRENT_PARTICIPANT_SUCCESS"
+
+
 export const register = credentials => dispatch => {
     dispatch({type: REGISTER_START })
 
@@ -60,11 +64,12 @@ export const login = credentials => dispatch => {
 }
 
 export const getTrips = userId => dispatch => {
-    console.log("Get trips actions result", axios.get(`http://localhost:5000/api/usertrips/${userId}`, {
-        headers: {
-            Authorization: localStorage.getItem('jwt')
-        }
-    }))
+    console.log("Get trips from actions ran")
+    // console.log("Get trips from actions ran", axios.get(`http://localhost:5000/api/usertrips/${userId}`, {
+    //     headers: {
+    //         Authorization: localStorage.getItem('jwt')
+    //     }
+    // }))
     dispatch({type: GET_TRIPS_START});
 
     axios.get(`http://localhost:5000/api/usertrips/${userId}`, {
@@ -72,10 +77,14 @@ export const getTrips = userId => dispatch => {
             Authorization: localStorage.getItem('jwt')
         }
     })
-    .then(res => dispatch({
+    .then(res => {
+        console.log("Res.data.user.trip in action", res.data.user.trip);
+         dispatch({
+        
         type: GET_TRIPS_SUCCESS,
         payload: res.data.user.trip
-    }))
+        })
+    })
     .catch(err => dispatch({
         type: GET_TRIPS_FAIL,
         payload: err
@@ -94,6 +103,7 @@ export const addTrip = (tripInfo, userId) => dispatch => {
     })
     .then(res => dispatch({
         type: ADD_TRIP_SUCCESS,
+        payload: res.data
     }))
     .catch(err => dispatch({
         type: ADD_TRIP_FAIL,
@@ -145,9 +155,6 @@ export const viewTripParticipants =  (tripId) => dispatch => {
    return axios.get(`http://localhost:5000/api/usertrips/participants/${tripId}`, {
         headers: {
             Authorization: localStorage.getItem('jwt')
-        },
-        params: {
-
         }
     })
     .then(res => dispatch({
@@ -158,4 +165,12 @@ export const viewTripParticipants =  (tripId) => dispatch => {
         type: VIEW_TRIP_PARTICIPANTS_FAIL,
         payload: err
     }))
+}
+
+export const sendCurrentParticipantInfo = (participantInfo) => {
+    console.log("Participant info in actions: ", participantInfo)
+    return {
+        type: SEND_CURRENT_PARTICIPANT_SUCCESS,
+        payload: participantInfo
+    }
 }
