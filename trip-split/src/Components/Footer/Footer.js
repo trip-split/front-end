@@ -6,10 +6,13 @@ const StyledFooter = styled.div`
 display: flex;
 justify-content: space-evenly;
 background: #C53360
-position: absolute;
 bottom: 0;
 width: 100%;
-height: 3rem
+height: 5rem
+padding-top: .5rem
+position: fixed;
+  bottom: 0;
+  width: 100%;
 `
 
  class Footer extends Component {
@@ -19,11 +22,13 @@ height: 3rem
   render() {
     return (
       <StyledFooter>
-        <i className="fas fa-car-side fa-3x"></i>
-        <Link to='/tripgroup'>
-            <i className="fas fa-users fa-3x"></i>
+        <i className="fas fa-car-side fa-2x"></i>
+        <Link style={{color:'black'}} to='/tripgroup'>
+            <i className="fas fa-users fa-2x"></i>
         </Link>
-        <i className="fas fa-money-bill-wave fa-3x"></i>
+        <Link style={{color:'black'}} to='/tripevents'>
+           <i className="fas fa-money-bill-wave fa-2x"></i>
+        </Link>
       </StyledFooter>
     )
   }

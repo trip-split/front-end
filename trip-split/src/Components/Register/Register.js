@@ -2,9 +2,11 @@ import React from "react"
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { register } from '../../actions/index'
+import {Link} from 'react-router-dom'
 
 const StyledPage = styled.div`
-
+background-color: #C53360;
+height: 750px;
 `
 
 const StyledForm = styled.div`
@@ -13,9 +15,30 @@ margin: 10% auto
 
 const StyledInput = styled.input`
     border: none;
-    border-bottom: 1px solid gray;
-    font-size: 2.4rem
+    
+    font-size: 2.4rem;
+    margin: .5rem;
+    text-align: center;
+    background-color: #C53360
+    color: white 
+    border-bottom: 1px solid white;
+    &::-webkit-input-placeholder {
+
+        color: white;
+
+    }
+        
 `
+
+const StyledButton = styled.button`
+    margin: 10px;
+    padding: 1px 45px;
+    border-radius: 5px;
+    background: white;
+    font-size: 2rem;
+    `
+
+
 
 class Register extends React.Component {
 
@@ -43,7 +66,7 @@ class Register extends React.Component {
      }
 
     
-
+// Don't need navigation links
      render() {
          return (
              <StyledPage>
@@ -70,7 +93,8 @@ class Register extends React.Component {
                     placeholder="Enter email"
                     onChange={this.handleChange} />
                     <br/>
-                    <button onClick={this.register}>Submit</button>
+                    <StyledButton onClick={this.register}>Submit</StyledButton>
+                    <p>Already a member? <Link to="/login">Log In</Link></p>
                 </StyledForm>
             </StyledPage>
          )

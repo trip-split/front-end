@@ -2,19 +2,40 @@ import React from "react"
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { login } from '../../actions/index'
-import axios from 'axios'
-const StyledPage = styled.div`
+// import axios from 'axios'
 
+const StyledPage = styled.div`
+background-color: #C53360;
+height: 750px;
 `
 
 const StyledForm = styled.div`
-margin: 10% auto
+margin: 10% auto;
+
 `
 
 const StyledInput = styled.input`
     border: none;
-    border-bottom: 1px solid gray;
-    font-size: 2.4rem
+    // border-radius: 5px;
+    font-size: 2.4rem;
+    margin: .5rem;
+    text-align: center;
+    background-color: #C53360
+    color: white 
+    border-bottom: 1px solid white;
+    &::-webkit-input-placeholder {
+
+        color: white;
+    
+      }
+`
+
+const StyledButton = styled.button`
+margin: 10px;
+padding: 1px 45px;
+border-radius: 5px;
+background: white;
+font-size: 2rem;
 `
 
 class Login extends React.Component {
@@ -41,20 +62,7 @@ class Login extends React.Component {
          .then(() => this.props.history.push('/homepage'));
      }
 
-    // register = e => {
-    //     e.preventDefault();
-    //     const URL = 'http://localhost:5000' 
-    //     // let URL = 'https://pintereacher.herokuapp.com'
-    //     const creds = this.state.credentials
-    //     axios.post(`${URL}/api/register`, creds)
-    //       .then(res => {
-    //         this.setState({isRegistered:true})
-    //         // localStorage.setItem("jwt", res.data.token);
-    //         this.props.history.push('/homepage')
-    //       }).catch(err => console.log(err));
-    //     console.log("Credentials", this.state.credentials);
-    //   };
-
+    //Don't need navigation links
      render() {
          return (
              <StyledPage>
