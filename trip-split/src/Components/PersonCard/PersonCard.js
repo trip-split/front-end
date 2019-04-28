@@ -8,17 +8,17 @@ import {sendCurrentParticipantInfo} from '../../actions/index'
 // Array of people 
 
 const PersonCardContainer = styled.div`
-      display: flex
+      display: flex;
       
-      width: 90%
-      margin: 0 auto
-      margin-bottom: 3rem
+      width: 90%;
+      margin: 0 auto;
+      margin-bottom: 3rem;
       justify-content: space-between
     `
 
     const NameAndPhoto = styled.div`
       display: flex;
-      width: 55%
+      width: 55%;
       justify-content: flex-start
     `
     const Name = styled.p`
@@ -75,7 +75,7 @@ const PersonCardContainer = styled.div`
         
       <PersonCardContainer>
         <NameAndPhoto>
-            <StyledImg src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0-cCY80KrYwh5cK3TypEgKLh99L9GrjnLJp_-Mc1BXnaKWCEs" />
+            <StyledImg src={this.props.participant.thumbnail} />
             <Name>{this.props.participant.name}</Name>
         </NameAndPhoto>
 

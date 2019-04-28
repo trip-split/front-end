@@ -1,41 +1,55 @@
 import React from 'react';
 import EventPriceInput from './EventPriceInput.js'
 
-function EventTitleInput(props) {
-  return(
-    <div>
-      <h2>Event Title</h2>
-      {props.titleAdded === false ?
-        <form>
-          <input
-            type="text" 
-            name="title"
-            value={props.title}
-            placeholder="Event..." 
-            onChange={props.handleChange} 
-          />
-          {props.title.length > 0 ?
-            <button onClick={props.titleAddedToggle}>Next</button>: null
-          }
-        </form>: 
-            <EventPriceInput 
-               handleChange={props.handleChange}
-               newEvent={props.newEvent}
-               priceAdded={props.priceAdded}
-               paidAdded={props.paidAdded}
-               priceAddedToggle={props.priceAddedToggle}
-               paidAddedToggle={props.paidAddedToggle}
-               user={props.user}
-               peopleOnTrip={props.peopleOnTrip}
-               userPaid={props.userPaid}
-               participantPaid={props.participantPaid}
-               total_price={props.total_price}
-             />
-       
-      }
-      
-    </div>
-  )
+class EventTitleInput extends React.Component {
+  state = {
+    title: '',
+    titleAdded: false
+  }
+
+  titleAddedToggle = e => {
+    e.preventDefault()
+    this.setState({
+      ...this.state,
+      titleAdded: true
+    })
+  }
+  
+  handleChange = e => {
+    this.setState({
+      ...this.state,
+      [e.target.name]: e.target.value
+    })
+  }
+  
+
+  render(){
+    return(
+      <div>
+        {this.state.titleAdded === false ?
+          <form>
+            <input
+              type="text" 
+              name="title"
+              value={this.state.title}
+              placeholder="Event..." 
+              onChange={this.handleChange} 
+            />
+            {this.state.title.length > 0 ?
+              <button onClick={this.titleAddedToggle}>
+                Next
+              </button>: null}
+          </form>: 
+              <EventPriceInput 
+                title={this.state.title} 
+                peopleOnTrip={this.props.peopleOnTrip}
+                currentTrip={this.props.currentTrip}
+              />
+        }
+      </div>
+    )
+  }
+  
 }
 
 export default EventTitleInput

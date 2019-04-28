@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {getTrips} from '../../actions/index'
 import axios from 'axios';
 import styled from 'styled-components'
-import Footer from '../Footer/Footer'
 
 const StyledButton = styled.div`
 position: fixed; 
@@ -30,25 +29,20 @@ class ViewAllEvents extends React.Component {
     if (!this.props.currentTrip[0]) {
       this.props.history.push(`/homepage`)
     } else {
-      this.setState({
-        ...this.state,
-        ...this.props.currentTrip
-        
-      })
-      console.log(this.state.currentTrip)
-  
-          let tripId = this.props.currentTrip[0].id
-          console.log(tripId)
-          axios
-            .get(`http://localhost:5000/api/usertrips/participants/${tripId}`, 
+      console.log(this.props.currentTrip);
+      let tripId = this.props.currentTrip[0].id;
+      console.log(tripId);
+        axios
+          .get(`http://localhost:5000/api/usertrips/participants/${tripId}`, 
             { headers: {
                  Authorization: localStorage.getItem('jwt')
               }})
-            .then(res => {
+          .then(res => {
               this.setState({
+                currentTrip: this.props.currentTrip,
                 peopleOnTrip: res.data.trip
-              })
-            }).catch(err => console.log(err));
+              })})
+          .catch(err => console.log(err));
           } 
     
   }
@@ -78,8 +72,7 @@ class ViewAllEvents extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    currentTrip: state.currentTrip,
-    peopleOnTrip: state.peopleOnTrip
+    currentTrip: state.currentTrip
   }
 }
 
