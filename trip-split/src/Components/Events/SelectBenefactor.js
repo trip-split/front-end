@@ -55,12 +55,13 @@ class SelectBenefactor extends React.Component {
             return (<ParticipantAvatar 
                      participant={participant} 
                      index={i}
+                     key={i}
                      clickHandler={this.whoPaid}/>
             ) 
           }
         )}
         {this.state.whoPaid === undefined ?
-            null : 
+          <p className='fadedNext'>Next</p>  : 
             <button onClick={this.bigSpender}>
               Next
             </button>
@@ -74,6 +75,7 @@ class SelectBenefactor extends React.Component {
           total_price={this.props.total_price}
           currentTrip={this.props.currentTrip}
           peopleOnTrip={this.props.peopleOnTrip}
+          whoPaid={this.state.whoPaid}
           user={this.props.user}
         />}
         

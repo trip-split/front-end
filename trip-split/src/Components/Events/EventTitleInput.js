@@ -38,7 +38,7 @@ class EventTitleInput extends React.Component {
             {this.state.title.length > 0 ?
               <button onClick={this.titleAddedToggle}>
                 Next
-              </button>: null}
+              </button>: <p className='fadedNext'>Next</p> }
           </form>: 
               <EventPriceInput 
                 title={this.state.title} 

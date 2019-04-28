@@ -42,7 +42,7 @@ class EventPriceInput extends React.Component {
             {this.state.total_price > 0 ?
               <button onClick={this.priceAddedToggle}>
                 Next
-              </button>: null}
+              </button>: <p className='fadedNext'>Next</p> }
           </div>:
           <SelectBenefactor 
             title={this.props.title}

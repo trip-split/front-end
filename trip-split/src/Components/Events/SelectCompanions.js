@@ -32,6 +32,33 @@ class SelectCompanions extends React.Component {
 
   addEvent(){
     console.log('event added')
+    let participantString = '';
+    let userParticipated = false;
+    let pals = this.state.companions
+    for(let i = 0; i < pals.length; i++) {
+      if(pals[i] === true){
+        if(i === 0) {
+          userParticipated = true
+        } else {
+          if (participantString.length > 0) {
+            participantString += ', ' + this.props.participants[i].id
+          } else {
+            participantString += this.props.participants[i].id
+          }
+          
+        } 
+      }
+    }
+    let event = {
+      trips_id: this.props.currentTrip[0].id,
+      title: this.props.title,
+      total_price: Number(this.props.total_price),
+      participants: participantString,
+      userOnTrip: userParticipated,
+      userPaid: this.props.userPaidBool,
+      participantPaid: this.props.whoPaid
+    }
+    console.log(event)
   }
 
   render(){
@@ -45,13 +72,14 @@ class SelectCompanions extends React.Component {
                 clickHandler={this.whoParticipated}
                 participant={participant}
                 index={i}
+                key={i}
               />
             ) 
           }
         )}
         {this.state.companionsAdded === false ?
-            null : 
-            <button onClick={this.bigSpender}>
+            <p className='fadedNext'>Next</p> : 
+            <button onClick={() => this.addEvent()}>
               Next
             </button>
           }
