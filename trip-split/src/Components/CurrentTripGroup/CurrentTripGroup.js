@@ -55,8 +55,10 @@ border: none
                  Authorization: localStorage.getItem('jwt')
               }})
             .then(res => {
+              let peopleOnTrip = res.data.trip
+              peopleOnTrip.unshift(this.props.user)
               this.setState({
-                peopleOnTrip: res.data.trip
+                peopleOnTrip: peopleOnTrip
               })
             }).catch(err => console.log(err));
           } 
@@ -94,7 +96,8 @@ border: none
 const mapStateToProps = state => {
   return {
     currentTrip: state.currentTrip,
-    peopleOnTrip: state.peopleOnTrip
+    peopleOnTrip: state.peopleOnTrip,
+    user: state.user
   }
 }
 

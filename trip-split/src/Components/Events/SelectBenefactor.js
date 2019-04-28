@@ -34,7 +34,6 @@ class SelectBenefactor extends React.Component {
         userPaidBool: true
       })
     }
-    
   } 
 
   bigSpender = e => {
@@ -56,7 +55,7 @@ class SelectBenefactor extends React.Component {
             return (<ParticipantAvatar 
                      participant={participant} 
                      index={i}
-                     whoPaid={this.whoPaid}/>
+                     clickHandler={this.whoPaid}/>
             ) 
           }
         )}
@@ -69,7 +68,7 @@ class SelectBenefactor extends React.Component {
         </div>: 
         <SelectCompanions
           participants={this.state.participants}
-          whoPaid={this.state.whoPaid}
+          clickHandler={this.state.whoPaid}
           userPaidBool={this.state.userPaidBool}
           title={this.props.title}
           total_price={this.props.total_price}
