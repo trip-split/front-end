@@ -42,6 +42,15 @@ class ViewAllEvents extends React.Component {
                 currentTrip: this.props.currentTrip,
                 peopleOnTrip: res.data.trip
               })})
+          .then(axios
+                  .get(`http://localhost:5000/api/usertrips/participants/${tripId}`,))
+                  .then(res => {
+                    console.log(res.data)
+                    this.setState({
+                      ...this.state,
+                      events: res.data
+                    })
+                  })
           .catch(err => console.log(err));
           } 
     
@@ -72,7 +81,11 @@ class ViewAllEvents extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    currentTrip: state.currentTrip
+    currentTrip: state.currentTrip,
+    isAddingEvent: state.isAddingEvent,
+    isFetchingEvents: state.isFetchingEvents,
+    fetchEventsError: state.fetchEventsError,
+    user: state.user
   }
 }
 

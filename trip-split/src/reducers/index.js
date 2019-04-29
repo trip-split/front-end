@@ -5,7 +5,7 @@ import {REGISTER_START, REGISTER_SUCCESS, REGISTER_FAIL,
     END_TRIP_START, END_TRIP_SUCCESS, END_TRIP_FAIL,
     ADD_NEW_PERSON_SUCCESS, ADD_NEW_PERSON_START, ADD_NEW_PERSON_FAIL, 
     VIEW_TRIP_PARTICIPANTS_START, VIEW_TRIP_PARTICIPANTS_SUCCESS, VIEW_TRIP_PARTICIPANTS_FAIL, 
-    SEND_CURRENT_PARTICIPANT_SUCCESS
+    SEND_CURRENT_PARTICIPANT_SUCCESS, ADD_NEW_EVENT_START, ADD_NEW_EVENT_SUCCESS, ADD_NEW_EVENT_FAIL, GET_EVENTS_START, GET_EVENTS_SUCCESS, GET_EVENTS_FAIL
 } from '../actions/index'
 
 const initialState = {
@@ -17,6 +17,9 @@ const initialState = {
     isEndingTrip: false,
     isAddingNewPerson: false,
     isFetchingTripParticipants: false,
+    isAddingEvent: false,
+    isFetchingEvents: false,
+    
     userTrips: [],
     currentTrip: [],
     pastTrips: [],
@@ -151,6 +154,43 @@ export const rootReducer = (state = initialState, action) => {
             return{
                 ...state,
                 isAddingNewPerson: false
+            }
+        case ADD_NEW_EVENT_START:
+            return {
+                ...state,
+                isAddingEvent: true
+            }
+        case ADD_NEW_EVENT_SUCCESS:
+            return {
+                ...state,
+                isAddingEvent: false
+            }
+        case ADD_NEW_EVENT_FAIL:
+            console.log(action.payload)
+            return{
+                ...state,
+                isAddingEvent: false
+            }
+        case GET_EVENTS_START:
+            console.log("Get events started...")
+                return {
+                    ...state,
+                    isFetchingTrips: true
+                }
+        case GET_EVENTS_SUCCESS:
+            console.log("Get events success payload: ", action.payload);
+        
+                return{
+                    ...state,
+                    isFetchingEvents: false,
+                    tripEvents: action.payload
+                }
+        case GET_EVENTS_FAIL:
+            console.log(action.payload)
+            return {
+                ...state, 
+                isFetchingEvents: false,
+                fetchEventsError: action.payload
             }
         case VIEW_TRIP_PARTICIPANTS_START:
             return{

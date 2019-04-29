@@ -1,5 +1,7 @@
 import React from 'react';
 import ParticipantAvatar from './ParticipantAvatar.js';
+import {addNewEvent} from '../../actions'
+import {connect} from 'react-redux'
 class SelectCompanions extends React.Component {
   state = {
     companionsAdded: false
@@ -29,9 +31,10 @@ class SelectCompanions extends React.Component {
       companionsAdded: companionsAdded
     })
   } 
-
-  addEvent(){
-    console.log('event added')
+  
+  addEvent = e => {
+    e.preventDefault()
+    console.log('event add fired')
     let participantString = '';
     let userParticipated = false;
     let pals = this.state.companions
@@ -58,7 +61,9 @@ class SelectCompanions extends React.Component {
       userPaid: this.props.userPaidBool,
       participantPaid: this.props.whoPaid
     }
-    console.log(event)
+    console.log(event);
+    this.props.addNewEvent(event)
+    .then(()=> this.props.history.push("/tripevents"))
   }
 
   render(){
@@ -79,7 +84,7 @@ class SelectCompanions extends React.Component {
         )}
         {this.state.companionsAdded === false ?
             <p className='fadedNext'>Next</p> : 
-            <button onClick={() => this.addEvent()}>
+            <button onClick={(e) => this.addEvent(e)}>
               Next
             </button>
           }
@@ -88,4 +93,10 @@ class SelectCompanions extends React.Component {
   }
 }
 
-export default SelectCompanions
+const mapStateToProps = state => {
+  return{
+    isAddingEvent: state.isAddingEvent
+  }
+}
+
+export default connect(mapStateToProps, {addNewEvent})(SelectCompanions);

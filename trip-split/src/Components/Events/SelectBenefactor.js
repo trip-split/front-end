@@ -69,7 +69,7 @@ class SelectBenefactor extends React.Component {
         </div>: 
         <SelectCompanions
           participants={this.state.participants}
-          clickHandler={this.state.whoPaid}
+          whoPaid={this.state.whoPaid}
           userPaidBool={this.state.userPaidBool}
           title={this.props.title}
           total_price={this.props.total_price}
