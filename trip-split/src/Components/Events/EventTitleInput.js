@@ -1,12 +1,17 @@
 import React from 'react';
 import EventPriceInput from './EventPriceInput.js'
+import {connect} from 'react-redux';
+import {viewTripParticipants} from '../../actions/index'
 
 class EventTitleInput extends React.Component {
   state = {
     title: '',
     titleAdded: false
   }
-
+  componentDidMount(){
+    let peopleOnTrip = this.props.viewTripParticipants(this.props.currentTrip[0].id)
+    console.log(peopleOnTrip)
+  }
   titleAddedToggle = e => {
     e.preventDefault()
     this.setState({
@@ -52,4 +57,6 @@ class EventTitleInput extends React.Component {
   
 }
 
-export default EventTitleInput
+
+
+export default connect(null, {viewTripParticipants})(EventTitleInput);

@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {getTrips} from '../../actions/index'
 import axios from 'axios';
 import styled from 'styled-components'
+import EventCards from './EventCards'
 
 const StyledButton = styled.div`
 position: fixed; 
@@ -23,9 +24,6 @@ class ViewAllEvents extends React.Component {
     addingEvent: false
   }
   componentDidMount() {
-
-    this.props.getTrips(localStorage.getItem('userId'));
-
     if (!this.props.currentTrip[0]) {
       this.props.history.push(`/homepage`)
     } else {
@@ -33,24 +31,17 @@ class ViewAllEvents extends React.Component {
       let tripId = this.props.currentTrip[0].id;
       console.log(tripId);
         axios
-          .get(`http://localhost:5000/api/usertrips/participants/${tripId}`, 
+          .get(`https://back-end-trip-split-pg.herokuapp.com/api/usertrips/events/${tripId}`, 
             { headers: {
                  Authorization: localStorage.getItem('jwt')
               }})
           .then(res => {
+             console.log(res)
               this.setState({
+                peopleOnTrip: this.props.peopleOnTrip,
                 currentTrip: this.props.currentTrip,
-                peopleOnTrip: res.data.trip
+                eventsOnTrip: res.data.event
               })})
-          .then(axios
-                  .get(`http://localhost:5000/api/usertrips/participants/${tripId}`,))
-                  .then(res => {
-                    console.log(res.data)
-                    this.setState({
-                      ...this.state,
-                      events: res.data
-                    })
-                  })
           .catch(err => console.log(err));
           } 
     
@@ -63,14 +54,18 @@ class ViewAllEvents extends React.Component {
   }
 
   render() {
+    console.log(this.state, this.props)
     return(
       <>
         <div>
         <h2>ViewAllEvents</h2>
+        
         <button onClick={this.addingEvent}>Add Event</button>
-        {this.state.addingEvent === false ? null: 
+        {this.state.addingEvent === false ? 
+        this.state.eventsOnTrip ?
+        <EventCards events={this.state.eventsOnTrip} peopleOnTrip={this.props.peopleOnTrip}/>:
+        <p>Loading events...</p>: 
         <AddEventForm  
-          peopleOnTrip={this.state.peopleOnTrip}
           currentTrip={this.state.currentTrip}
         /> }
         </div>

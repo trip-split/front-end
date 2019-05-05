@@ -65,8 +65,8 @@ margin-bottom: 2rem
   }
 
   render() {
-    console.log("People Trip Form currentTrip:", this.props.currentTrip[0])
-    console.log("State current trip:", this.state.currentTrip)
+    // console.log("People Trip Form currentTrip:", this.props.currentTrip[0])
+    // console.log("State current trip:", this.state.currentTrip)
     return (
       <>
         <div>

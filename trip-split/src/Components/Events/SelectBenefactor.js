@@ -1,6 +1,8 @@
 import React from 'react';
 import ParticipantAvatar from './ParticipantAvatar.js';
 import SelectCompanions from './SelectCompanions.js';
+import {viewTripParticipants} from '../../actions/index'
+import {connect} from 'react-redux'
 
 class SelectBenefactor extends React.Component {
   state= {
@@ -11,13 +13,18 @@ class SelectBenefactor extends React.Component {
   }
 
   componentDidMount() {
+    this.props.viewTripParticipants(this.props.currentTrip[0].id)
+    console.log('Select Benefactor PeopleOnTrip?:', this.props.peopleOnTrip)
+    console.log('Select Benefactor Form ID:', this.props.currentTrip[0].id)
+    console.log(this.props)
     let array = this.props.peopleOnTrip;
     array.unshift(this.props.user)
-    console.log(array)
+    console.log('Select Benefactor PeopleOnTrip:', array)
     this.setState({
       participants: array,
       whoPaid: undefined
     })
+
   }
   
   whoPaid = (index) => {
@@ -45,7 +52,9 @@ class SelectBenefactor extends React.Component {
   }
   
   render() {
-    console.log(this.state)
+    console.log('select benefactor participants:', this.state.participants)
+    // console.log(this.state)
+    // console.log('Select Benefactor Form Finding People:', this.state.peopleOnTrip)
     return(
       <div>
         {this.state.paidAdded === false ?
@@ -78,6 +87,7 @@ class SelectBenefactor extends React.Component {
           whoPaid={this.state.whoPaid}
           user={this.props.user}
         />}
+
         
       </div>
     )
@@ -85,4 +95,11 @@ class SelectBenefactor extends React.Component {
   
 }
 
-export default SelectBenefactor
+
+const mapStateToProps = state => {
+  return{
+      peopleOnTrip: state.peopleOnTrip
+  }
+}
+
+export default connect(mapStateToProps, {viewTripParticipants})(SelectBenefactor);

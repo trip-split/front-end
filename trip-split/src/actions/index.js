@@ -44,7 +44,7 @@ export const SEND_CURRENT_PARTICIPANT_SUCCESS = "SEND_CURRENT_PARTICIPANT_SUCCES
 export const register = credentials => dispatch => {
     dispatch({type: REGISTER_START })
 
-    return axios.post('http://localhost:5000/api/register', credentials)
+    return axios.post('https://back-end-trip-split-pg.herokuapp.com/api/register', credentials)
     .then(res => dispatch({
         
         type: REGISTER_SUCCESS,
@@ -59,7 +59,7 @@ export const register = credentials => dispatch => {
 export const login = credentials => dispatch => {
     dispatch({type: LOGIN_START});
 
-    return axios.post('http://localhost:5000/api/login', credentials)
+    return axios.post('https://back-end-trip-split-pg.herokuapp.com/api/login', credentials)
     .then(res => dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data
@@ -71,7 +71,7 @@ export const login = credentials => dispatch => {
 }
 
 export const getTrips = userId => dispatch => {
-    console.log("Get trips from actions ran")
+    // console.log("Get trips from actions ran")
     // console.log("Get trips from actions ran", axios.get(`http://localhost:5000/api/usertrips/${userId}`, {
     //     headers: {
     //         Authorization: localStorage.getItem('jwt')
@@ -79,13 +79,13 @@ export const getTrips = userId => dispatch => {
     // }))
     dispatch({type: GET_TRIPS_START});
 
-    axios.get(`http://localhost:5000/api/usertrips/${userId}`, {
+    axios.get(`https://back-end-trip-split-pg.herokuapp.com/api/usertrips/${userId}`, {
         headers: {
             Authorization: localStorage.getItem('jwt')
         }
     })
     .then(res => {
-        console.log("Res.data.user.trip in action", res.data.user.trip);
+        // console.log("Res.data.user.trip in action", res.data.user.trip);
          dispatch({
         
         type: GET_TRIPS_SUCCESS,
@@ -103,7 +103,7 @@ export const getTrips = userId => dispatch => {
 export const addTrip = (tripInfo, userId) => dispatch => {
     dispatch({type: ADD_TRIP_START});
 
-   return axios.post(`http://localhost:5000/api/trips`, tripInfo, {
+   return axios.post(`https://back-end-trip-split-pg.herokuapp.com/api/trips`, tripInfo, {
         headers: {
             Authorization: localStorage.getItem('jwt')
         }
@@ -121,7 +121,7 @@ export const addTrip = (tripInfo, userId) => dispatch => {
 export const endTrip =  (tripId) => dispatch => {
     dispatch({type: END_TRIP_START});
 
-   return axios.put(`http://localhost:5000/api/trips/${tripId}`, {isCurrent: 0}, {
+   return axios.put(`https://back-end-trip-split-pg.herokuapp.com/api/trips/${tripId}`, {isCurrent: 0}, {
         headers: {
             Authorization: localStorage.getItem('jwt')
         }
@@ -137,10 +137,10 @@ export const endTrip =  (tripId) => dispatch => {
 }
 
 export const addNewPerson = personInfo => dispatch => {
-    console.log("Add new person in actions fired")
+    // console.log("Add new person in actions fired")
     dispatch({type: ADD_NEW_PERSON_START})
 
-    axios.post(`http://localhost:5000/api/usertrips/add-participant`, personInfo, {
+    axios.post(`https://back-end-trip-split-pg.herokuapp.com/api/usertrips/add-participant`, personInfo, {
         headers: {
             Authorization: localStorage.getItem('jwt')
         }
@@ -158,16 +158,19 @@ export const addNewPerson = personInfo => dispatch => {
 
 export const viewTripParticipants =  (tripId) => dispatch => {
     dispatch({type: VIEW_TRIP_PARTICIPANTS_START});
-
-   return axios.get(`http://localhost:5000/api/usertrips/participants/${tripId}`, {
+    console.log('View Participants Start')
+   return axios.get(`https://back-end-trip-split-pg.herokuapp.com/api/usertrips/participants/${tripId}`, {
         headers: {
             Authorization: localStorage.getItem('jwt')
         }
     })
-    .then(res => dispatch({
-        type: VIEW_TRIP_PARTICIPANTS_SUCCESS,
-        payload: res.data
-    }))
+    .then(res =>{
+        console.log('View Participants Success',res)
+        dispatch({
+            type: VIEW_TRIP_PARTICIPANTS_SUCCESS,
+            payload: res.data
+        })
+    })
     .catch(err => dispatch({
         type: VIEW_TRIP_PARTICIPANTS_FAIL,
         payload: err
@@ -183,10 +186,10 @@ export const sendCurrentParticipantInfo = (participantInfo) => {
 }
 
 export const addNewEvent = eventInfo => dispatch => {
-    console.log("Add new event in actions fired")
+    console.log("Add new event in actions fired", eventInfo)
     dispatch({type: ADD_NEW_EVENT_START})
 
-    axios.post(`http://localhost:5000/api/usertrips/add-events`, eventInfo, {
+    axios.post(`https://back-end-trip-split-pg.herokuapp.com/api/usertrips/add-event`, eventInfo, {
         headers: {
             Authorization: localStorage.getItem('jwt')
         }
@@ -205,7 +208,7 @@ export const getEvents = tripId => dispatch => {
     console.log("Get events from actions ran")
     dispatch({type: GET_EVENTS_START});
 
-    axios.get(`http://localhost:5000/api/usertrips/events/${tripId}`, {
+    axios.get(`https://back-end-trip-split-pg.herokuapp.com/api/usertrips/events/${tripId}`, {
         headers: {
             Authorization: localStorage.getItem('jwt')
         }

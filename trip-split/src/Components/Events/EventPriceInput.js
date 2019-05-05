@@ -13,6 +13,7 @@ class EventPriceInput extends React.Component {
       ...this.state,
       total_price: e.target.value
     })
+    // console.log('Event Price Input', this.state)
   }
 
   priceAddedToggle = e => {
@@ -24,6 +25,7 @@ class EventPriceInput extends React.Component {
   }
 
   render() {
+    // console.log(this.props)
     return(
       <div>
         {this.state.priceAdded === false ?
@@ -45,6 +47,7 @@ class EventPriceInput extends React.Component {
               </button>: <p className='fadedNext'>Next</p> }
           </div>:
           <SelectBenefactor 
+            // currentTrip={this.props.currentTrip}
             title={this.props.title}
             total_price={this.state.total_price}
             currentTrip={this.props.currentTrip}

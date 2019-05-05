@@ -7,7 +7,6 @@ function AddEventForm(props) {
     <div>
       <h1>Add Event</h1>
       <EventTitleInput 
-        peopleOnTrip={props.peopleOnTrip}
         currentTrip={props.currentTrip}
       />
     </div>

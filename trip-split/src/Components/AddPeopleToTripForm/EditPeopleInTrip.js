@@ -42,7 +42,7 @@ padding: 15px;
   componentDidMount() {
     
     this.props.getTrips(localStorage.getItem('userId'));
-    console.log("Current Trips array", this.props.currentTrip)
+    // console.log("Current Trips array", this.props.currentTrip)
   }
 
   handleChange = e => {
@@ -59,7 +59,7 @@ padding: 15px;
     let personId = this.props.currentParticipant.id
     
     axios
-    .put(`http://localhost:5000/api/usertrips/edit-participant/${personId}`, 
+    .put(`https://back-end-trip-split-pg.herokuapp.com/api/usertrips/edit-participant/${personId}`, 
     {
       name: this.state.personInfo.name, thumbnail: this.state.personInfo.thumbnail 
     },

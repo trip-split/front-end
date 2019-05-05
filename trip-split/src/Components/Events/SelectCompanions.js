@@ -2,6 +2,7 @@ import React from 'react';
 import ParticipantAvatar from './ParticipantAvatar.js';
 import {addNewEvent} from '../../actions'
 import {connect} from 'react-redux'
+import axios from 'axios'
 class SelectCompanions extends React.Component {
   state = {
     companionsAdded: false
@@ -62,8 +63,20 @@ class SelectCompanions extends React.Component {
       participantPaid: this.props.whoPaid
     }
     console.log(event);
-    this.props.addNewEvent(event)
-    .then(()=> this.props.history.push("/tripevents"))
+    try {
+      this.props.addNewEvent(event)
+    }
+    catch {
+      console.log('You fucked up')
+    }
+    
+    // axios.post(`https://back-end-trip-split-pg.herokuapp.com/api/usertrips/add-event`, event, {
+    //     headers: {
+    //         Authorization: localStorage.getItem('jwt')
+    //     }
+    // })
+    // .then(()=> this.props.history.push("/tripevents"))
+    // .catch()
   }
 
   render(){

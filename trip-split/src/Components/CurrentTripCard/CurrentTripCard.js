@@ -14,7 +14,7 @@ import {connect} from 'react-redux'
     `
 
     const MainContainer = styled.div`
-    display: flex
+    display: flex;
     border-radius: .25rem .25rem 0 0;
     `;
 

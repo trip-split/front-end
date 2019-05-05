@@ -82,12 +82,13 @@ export const rootReducer = (state = initialState, action) => {
         case GET_TRIPS_SUCCESS:
             console.log("Get trips success payload: ", action.payload);
             const currentTrip = action.payload.filter(currentTrip => {
-                return currentTrip.isCurrent === 1
+                return currentTrip.isCurrent === true
             })
+            console.log('Current Trip:', currentTrip)
             const pastTrips = action.payload.filter(currentTrip => {
-                return currentTrip.isCurrent !== 1
+                return currentTrip.isCurrent !== true
             })
-            console.log("Reducer current Trip", currentTrip);
+            console.log("Reducer past Trip", pastTrips);
             return{
                 ...state,
                 isFetching: false,

@@ -47,10 +47,14 @@ const PersonCardContainer = styled.div`
 
  export class PersonCard extends Component {
 
+    componentDidMount() {
+
+    }
+
     deletePerson = e => {
-        console.log("Delete person fired")
         let participantId = this.props.participant.id;
-        axios.delete(`http://localhost:5000/api/usertrips/delete-participant/${participantId}`, 
+        console.log("Delete person fired", this.props.participant.id, this.props.currentParticipant.id)
+        axios.delete(`https://back-end-trip-split-pg.herokuapp.com/api/usertrips/delete-participant/${participantId}`, 
         { headers: {
             Authorization: localStorage.getItem('jwt')
         }})

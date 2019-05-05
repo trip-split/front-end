@@ -10,7 +10,7 @@ import {
 import CurrentTripCard from '../CurrentTripCard/CurrentTripCard';
 import PastTripCard from '../PastTripCard/PastTripCard'
 import Footer from '../Footer/Footer'
-import {getTrips} from '../../actions/index'
+import {getTrips, viewTripParticipants} from '../../actions/index'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
@@ -57,11 +57,15 @@ class Homepage extends Component {
     }
 
     componentDidMount(){
-        console.log('CDM ran');
-        this.props.getTrips(localStorage.getItem('userId'));
-        this.setState({
-            loading: false
-        })
+        // console.log('CDM ran');
+        this.props.getTrips(localStorage.getItem('userId'))
+            // this.setState({
+            //     loading: false,
+            //     currentTrip: this.props.currentTrip[0]
+            // })
+            // this.props.viewTripParticipants(this.state.currentTrip.id)
+        // console.log(res.payload)
+        // console.log(this.props)
     }
 
     Logout = e => {
@@ -72,7 +76,7 @@ class Homepage extends Component {
         if(this.props.isFetching){
           return <div> Is Loading... </div>
         } else {
-      console.log("Homepage current trip:", this.props.currentTrip)
+    //   console.log("Homepage current trip:", this.props.currentTrip[0])
     
 
     // Logout Button, Add New Trip
@@ -123,4 +127,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {getTrips})(Homepage)
+export default connect(mapStateToProps, {getTrips, viewTripParticipants})(Homepage)

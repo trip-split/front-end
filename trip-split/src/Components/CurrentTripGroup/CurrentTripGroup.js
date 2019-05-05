@@ -50,12 +50,13 @@ border: none
           let tripId = this.props.currentTrip[0].id
           console.log(tripId)
           axios
-            .get(`http://localhost:5000/api/usertrips/participants/${tripId}`, 
+            .get(`https://back-end-trip-split-pg.herokuapp.com/api/usertrips/participants/${tripId}`, 
             { headers: {
                  Authorization: localStorage.getItem('jwt')
               }})
             .then(res => {
               let peopleOnTrip = res.data.trip
+              console.log(peopleOnTrip)
               peopleOnTrip.unshift(this.props.user)
               this.setState({
                 peopleOnTrip: peopleOnTrip
